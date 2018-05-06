@@ -1,0 +1,10 @@
+<section class="container">
+        <h3 class="jumbotron-heading text-center">Admin Users</h3>
+      <div class="container text-center">
+        <ul class="list-group">
+          {{#each users}}
+            <li class="list-group-item"><a href="/users/admin_user{{_id}}">{{this.name}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+</secion>

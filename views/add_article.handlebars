@@ -1,0 +1,32 @@
+<title>Node File Uploads</title>
+</head>
+<body>
+  <div class="container">
+    <h2 class="page-header">Add Article</h2>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <div class="file-field input-field">
+        <div class="btn grey">
+          <span>File</span>
+          <input name="myImage" type="file">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate text-center" type="text"  placeholder="Upload and images">
+        </div>
+      </div>
+      <div class="container text-left">
+          <label>Title</label>
+          <input class="form-control" type="text" name="title">
+          <label>Author</label>
+          <input class="form-control" type="text" name="author">
+          <label>Body</label>
+          <textarea class="form-control" name="body"></textarea>
+        </div>
+        <br>
+      <button type="submit" class="btn">Submit</button>
+    </form>
+    <br>
+  </div>
+  {{#each article}}
+    <a href="/users/article/edit{{this._id}}">{{this.title}}</a>
+    <br>
+  {{/each}}

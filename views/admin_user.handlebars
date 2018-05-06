@@ -1,0 +1,16 @@
+<section class="container">
+        <h3 class="jumbotron-heading">Users</h3>
+      <div class="container">
+        <ul class="list-group">
+          <div class="container">
+            <h3>{{user.name}}</h3>
+          </div>
+          <div class="button">
+            {{#if user.isAdmin}}
+              <p>This user had administrative rights</p>
+            {{/if}}
+            <button class="btn btn-danger delete-user" data-id={{user._id}}><a href="#">Delete</a></button>
+          </div>
+        </ul>
+      </div>
+</secion>

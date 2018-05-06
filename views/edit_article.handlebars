@@ -1,0 +1,15 @@
+<form method="POST" action="/users/article/edit{{article._id}}">
+  <div class="container text-left">
+   <label>Title</label>
+   <input class="form-control" type="text" name="title" value="{{article.title}}">
+   <label>Author</label>
+   <input class="form-control" type="text" name="author" value="{{article.author}}">
+   <label>Body</label>
+   <textarea class="form-control" name="body">{{article.body}}</textarea>
+   </div>
+   <br>
+   <button class="btn" type="submit" value="Submit">Update</button>
+   <button class="btn delete-article" type="submit" data-id={{article._id}}><a href="#">Delete</a></button>
+
+</form>
+<br>

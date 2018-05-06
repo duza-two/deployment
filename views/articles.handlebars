@@ -1,0 +1,19 @@
+<div class="container main">
+  <div class="heading">
+  <h3 class="page-header pl-4">Articles</h3>
+  <hr>
+  </div>
+    {{#each article}}
+    <div class="article-section d-flex my-flex-container p-1">
+      <div id="myImg">
+        <img src="/uploads/{{this.filename}}">
+      </div>
+      <div class="pl-5">
+        <h4>{{this.title}}</h4>
+        <p>Created by: {{this.author}}</p>
+        <p>{{this.body}}</p>
+        <p><a href="#">Read more</a></p>
+      </div>
+    </div>
+    {{/each}}
+ </div>
