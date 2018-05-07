@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 // schema for uploading articles
 var BlogSchema = mongoose.Schema({
+  image: String,
   fieldname:  String,
   originalname: String,
   encoding: String,

@@ -1,5 +1,7 @@
 {
   "env": {
-    "MONGO_ATLAS_PW": "Nickie01"
+    "MONGO_ATLAS_PW": "Nickie01",
+    "CLOUDINARY_API_KEY": "627987727797317",
+    "CLOUDINARY_API_SECRET": "17sTD_KvRZAuKivxwwcGNbv7Q-0"
   }
 }

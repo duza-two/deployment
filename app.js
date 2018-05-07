@@ -25,36 +25,33 @@ var Blog = require('./models/article');
 
 // Set The Storage Engine
 const storage = multer.diskStorage({
-  destination: './public/uploads',
   filename: function(req, file, cb){
-    cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    cb(null, Date.now() + file.originalname);
   }
 });
 
+var imageFilter = function (req, file, cb) {
+  // accept image files only
+  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+      return cb(new Error('Only image files are allowed!'), false);
+  }
+  cb(null, true);
+};
+
 // Init Upload
-const upload = multer({
+var upload = multer({ 
   storage: storage,
-  limits:{fileSize: 1000000},
-  fileFilter: function(req, file, cb){
-    checkFileType(file, cb);
-  }
-}).single('myImage');
+  limits:{fileSize: 1000000}, 
+  fileFilter: imageFilter
+})
 
-// Check File Type
-function checkFileType(file, cb){
-  // Allowed ext
-  const filetypes = /jpeg|jpg|png|gif/;
-  // Check ext
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  // Check mime
-  const mimetype = filetypes.test(file.mimetype);
+var cloudinary = require('cloudinary');
+cloudinary.config({ 
+cloud_name: 'dgjlx95cc', 
+api_key: process.env.CLOUDINARY_API_KEY, 
+api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
-  if(mimetype && extname){
-    return cb(null,true);
-  } else {
-    cb('Error: Images Only!');
-  }
-}
 
 //Init app
 var app = express();
@@ -118,15 +115,11 @@ app.use('/', routes);
 app.use('/users', users);
 
 // Image post
-app.post('/upload', function(req, res) {
-  upload(req, res, function(err) {
-    if(err){
-      res.render('index', {
-        msg: err
-      });
-    } else {
+app.post('/upload', upload.single('myImage'), function(req, res) {
+  cloudinary.uploader.upload(req.file.path, function(result) {
       let blog = Blog();
       console.log(req.file);
+      blog.image = result.secure_url;
       blog.fieldname = req.file.fieldname;
       blog.originalname = req.file.originalname;
       blog.encoding = req.file.encoding;
@@ -146,7 +139,6 @@ app.post('/upload', function(req, res) {
             res.redirect('/users/articles');
         }
     });
-    }
   });
 });
 
