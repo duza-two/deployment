@@ -184,7 +184,7 @@ router.post('/register', function(req, res){
           }
               }
             })
-  
+
 });
 
 passport.use(new LocalStrategy(

@@ -13,10 +13,7 @@ var mongoose = require("mongoose");
 var multer = require('multer');
 
 // Connecting to the database
-mongoose.connect('mongodb://duza-two:' + process.env.MONGO_ATLAS_PW + '@node-rest-shop-shard-00-00-vlgre.mongodb.net:27017,node-rest-shop-shard-00-01-vlgre.mongodb.net:27017,node-rest-shop-shard-00-02-vlgre.mongodb.net:27017/sinuthex?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin'
-);
-var db = mongoose.connection;
-
+mongoose.connect('mongodb://admin:Nickie01@ds115854.mlab.com:15854/sinuthex');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -39,17 +36,17 @@ var imageFilter = function (req, file, cb) {
 };
 
 // Init Upload
-var upload = multer({ 
+var upload = multer({
   storage: storage,
-  limits:{fileSize: 1000000}, 
+  limits:{fileSize: 1000000},
   fileFilter: imageFilter
 })
 
 var cloudinary = require('cloudinary');
-cloudinary.config({ 
-cloud_name: 'dgjlx95cc', 
-api_key: process.env.CLOUDINARY_API_KEY, 
-api_secret: process.env.CLOUDINARY_API_SECRET
+cloudinary.config({
+cloud_name: 'dgjlx95cc',
+api_key: "627987727797317",
+api_secret: "17sTD_KvRZAuKivxwwcGNbv7Q-0"
 });
 
 
